@@ -1,0 +1,6 @@
+doc/
+modules/*
+!/**/.gitkeep
+build
+.idea/
+.gradle/

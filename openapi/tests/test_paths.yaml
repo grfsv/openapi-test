@@ -1,0 +1,32 @@
+Tests:
+  get:
+    tags:
+      - test
+    summary: テスト用エンドポイント
+    description: 同じtestグループのファイル内に生成したい
+    responses:
+      '200':
+        description: 成功
+        content:
+          application/json:
+            schema:
+              $ref: './test_schemas.yaml#/Tests'
+
+  post:
+    tags:
+      - test
+    summary: テスト用エンドポイント
+    description: テストグループに配置されるのを確認
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './test_schemas.yaml#/TestRequests'
+    responses:
+      '200':
+        description: せいこうした
+        content:
+          application/json:
+            schema:
+              $ref: './test_schemas.yaml#/TestResponse'

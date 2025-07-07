@@ -1,0 +1,1 @@
+{{#isHeaderParam}}@RequestHeader(value = "{{baseName}}"{{^required}}, required = false{{/required}}) {{#useBeanValidation}}{{>beanValidation}} {{/useBeanValidation}}{{paramName}}: {{dataType}}{{#hasMore}}{{/hasMore}}{{^hasMore}}{{/hasMore}}{{/isHeaderParam}}

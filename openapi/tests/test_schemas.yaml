@@ -1,0 +1,52 @@
+Tests:
+  type: array
+  items:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date
+        description: "ユーザーとすれ違った日付"
+      encounter:
+        type: array
+        items:
+          type: string
+          description: "対象の日にすれ違ったユーザー鍵の一覧"
+
+TestRequests:
+    type: object
+    properties:
+      test:
+        type: array
+        items:
+          type: object
+          properties:
+            date:
+              type: string
+              format: date
+              description: "ユーザーとすれ違った日付"
+            encounter:
+              type: array
+              items:
+                type: string
+                description: "対象の日にすれ違ったユーザー鍵の一覧"
+            response:
+              type: string
+              description: "レスポンス"
+TestResponse:
+  type: object
+  properties:
+    test:
+      type: array
+      items:
+        type: object
+        properties:
+          date:
+            type: string
+            format: date
+            description: "ユーザーとすれ違った日付"
+          encounter:
+            type: array
+            items:
+              type: string
+              description: "対象の日にすれ違ったユーザー鍵の一覧"
