@@ -24,16 +24,21 @@ fun GenerateTask.applyCommonSettings() {
 		mapOf(
 			"omitGradleWrapper" to "true",	// gradle wrapperを生成しない
 			"library" to "ktor2",
-			"packageName" to "",	// これわからんけどいらないinfrastructureが生成されるディレクトリを指定している
-			"dateLibrary" to "kotlinx-datetime",	// デフォルトの日付がjavaの型なのでkotlinxに変更
-			"serializationLibrary" to "kotlinx_serialization"
+			"packageName" to "com.streview.usecase",	// パッケージ名を設定
+			"dateLibrary" to "string",	// 日付を文字列として扱う
+			"serializationLibrary" to "kotlinx_serialization",
+			"generateSchemaAsDataClass" to "true"	// スキーマ名をそのまま使用
 		)
 	)
 
 	additionalProperties.set(
 		mapOf(
 			"useTags" to "true",	// tagsに基づいてファイルを作成するように、デフォルトだとエンドポイント毎に生成される
-			"enablePostProcessFile" to "true"	// ポストプロセッシングを有効にする
+			"enablePostProcessFile" to "true",	// ポストプロセッシングを有効にする
+			"enumPropertyNaming" to "original",	// enumのプロパティ名を元の名前のまま使用
+			"modelPropertyNaming" to "original",	// モデルのプロパティ名を元の名前のまま使用
+			"skipFormModel" to "false",	// フォームモデルをスキップしない
+			"useCoroutines" to "true"	// コルーチンを使用
 		)
 	)
 
@@ -56,7 +61,7 @@ task<GenerateTask>("generateApis") {
 	// API固有の設定
 
 	outputDir.set("$projectDir/modules/presentation")	// 生成先
-	apiPackage.set("com.streview.modules")	// パッケージ
+	apiPackage.set("com.streview.controller")	// パッケージ
 
 	globalProperties.set(
 		globalProperties.get() + mapOf(
@@ -68,18 +73,47 @@ task<GenerateTask>("generateApis") {
 
 // モデル生成タスク
 task<GenerateTask>("generateModels") {
-	applyCommonSettings()
-
-	// モデル固有の設定
-//	templateDir.set("$projectDir/openapi/templates/kotlin")	// kotlin用のテンプレートディレクトリ
+	generatorName.set("kotlin-server")	
+	inputSpec.set("$projectDir/openapi/openapi.yaml")	
+	templateDir.set("$projectDir/openapi/templates/kotlin-server")	
+	skipOverwrite.set(false)	
 
 	outputDir.set("$projectDir/modules/application")
-	modelPackage.set("com.streview.usecase.dto")
+	modelPackage.set("com.streview.usecase")
+
+	configOptions.set(
+		mapOf(
+			"omitGradleWrapper" to "true",
+			"library" to "ktor2",
+			"packageName" to "com.streview.usecase",
+			"dateLibrary" to "string",
+			"serializationLibrary" to "kotlinx_serialization"
+		)
+	)
+
+	additionalProperties.set(
+		mapOf(
+			"useTags" to "true",
+			"enablePostProcessFile" to "true",
+			"enumPropertyNaming" to "original",
+			"modelPropertyNaming" to "original",
+			"apiPackage" to "com.streview.controller",
+			"modelPackage" to "com.streview.usecase"
+		)
+	)
+
+	generateModelDocumentation.set(false)
+	generateApiDocumentation.set(false)
+	generateModelTests.set(false)
+	generateApiTests.set(false)
 
 	globalProperties.set(
-		globalProperties.get() + mapOf(
+		mapOf(
+			"supportingFiles" to "false",
 			"apis" to "false",
-			"models" to ""
+			"models" to "SubGetRes,TestGetRes,TestGetResObject,TestPostReq,TestPostRes",
+			"modelDocs" to "false",
+			"apiDocs" to "false"
 		)
 	)
 }

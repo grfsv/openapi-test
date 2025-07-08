@@ -3,7 +3,22 @@ info:
   title: すとれびゅ！
   version: 1.0.0
 paths:
+  /test/{t_id}:
+    $ref: "./tests/test_paths.yaml#/TestsById"
   /test:
-    $ref: "./tests/test_paths.yaml#/Tests"
-
+    $ref: "./tests/test_paths.yaml#/TestsPost"
+  /sub:
+    $ref: "./sub/sub_paths.yaml#/Subs"
+components:
+  schemas:
+    SubGetRes:
+      $ref: "./sub/sub_schemas.yaml#/SubGetRes"
+    TestGetRes:
+      $ref: "./tests/test_schemas.yaml#/TestGetRes"
+    TestGetResObject:
+      $ref: "./tests/test_schemas.yaml#/TestGetResObject"
+    TestPostReq:
+      $ref: "./tests/test_schemas.yaml#/TestPostReq"
+    TestPostRes:
+      $ref: "./tests/test_schemas.yaml#/TestPostRes"
 

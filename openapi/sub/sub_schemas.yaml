@@ -1,0 +1,7 @@
+SubGetRes:
+  type: object
+  properties:
+    subArray:
+      type: array
+      items:
+        type: string

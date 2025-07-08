@@ -1,32 +1,41 @@
-Tests:
+TestsById:
   get:
+    operationId: getTestById
     tags:
       - test
-    summary: テスト用エンドポイント
-    description: 同じtestグループのファイル内に生成したい
+    summary: 何かを取得したいテストエンドポイント
+    description: テストグループに配置される
+    parameters:
+      - name: t_id
+        in: path
+        required: true
+        schema:
+          type: string
     responses:
       '200':
         description: 成功
         content:
           application/json:
             schema:
-              $ref: './test_schemas.yaml#/Tests'
+              $ref: '../openapi.yaml#/components/schemas/TestGetRes'
 
+TestsPost:
   post:
+    operationId: createTest
     tags:
       - test
-    summary: テスト用エンドポイント
-    description: テストグループに配置されるのを確認
+    summary: 何かを登録したいテストエンドポイント
+    description: テストグループに配置される
     requestBody:
       required: true
       content:
         application/json:
           schema:
-            $ref: './test_schemas.yaml#/TestRequests'
+            $ref: '../openapi.yaml#/components/schemas/TestPostReq'
     responses:
-      '200':
+      '201':
         description: せいこうした
         content:
           application/json:
             schema:
-              $ref: './test_schemas.yaml#/TestResponse'
+              $ref: '../openapi.yaml#/components/schemas/TestPostRes'

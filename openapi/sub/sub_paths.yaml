@@ -1,0 +1,14 @@
+Subs:
+  get:
+    operationId: getSubData
+    tags:
+      - subs
+    summary: Subテストエンドポイント
+    description: Subグループにあるよ
+    responses:
+      '200':
+        description: せいこう
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/SubGetRes'

@@ -1,52 +1,40 @@
-Tests:
-  type: array
-  items:
-    type: object
-    properties:
-      date:
-        type: string
-        format: date
-        description: "ユーザーとすれ違った日付"
-      encounter:
-        type: array
-        items:
-          type: string
-          description: "対象の日にすれ違ったユーザー鍵の一覧"
-
-TestRequests:
-    type: object
-    properties:
-      test:
-        type: array
-        items:
-          type: object
-          properties:
-            date:
-              type: string
-              format: date
-              description: "ユーザーとすれ違った日付"
-            encounter:
-              type: array
-              items:
-                type: string
-                description: "対象の日にすれ違ったユーザー鍵の一覧"
-            response:
-              type: string
-              description: "レスポンス"
-TestResponse:
+TestGetRes:
   type: object
   properties:
-    test:
+    testGetResString:
+      type: string
+    testGetResArray:
+      type: array
+      items:
+        type: string
+    testGetResObject:
+      $ref: '#/TestGetResObject'
+
+TestGetResObject:
+  type: object
+  properties:
+    getObjectPropInt:
+      type: integer
+
+TestPostReq:
+  type: object
+  properties:
+    testPostReqArray:
       type: array
       items:
         type: object
         properties:
-          date:
+          arrayInDate:
             type: string
             format: date
-            description: "ユーザーとすれ違った日付"
-          encounter:
+          arrayInArray:
             type: array
             items:
               type: string
-              description: "対象の日にすれ違ったユーザー鍵の一覧"
+
+TestPostRes:
+  type: object
+  properties:
+    testUuid:
+      type: string
+
